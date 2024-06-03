@@ -18,6 +18,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { Response } from 'express';
 
 import { AuthGuard } from '@nestjs/passport';
+import { isAuthGuard } from 'src/shared/gaurds/auth.gaurds';
 
 @Controller('profile')
 export class ProfilesController {
@@ -31,6 +32,7 @@ export class ProfilesController {
   }
 
   @Get('/logout')
+  @UseGuards(isAuthGuard)
   logOut(@Res() res) {
     return this.profilesService.logOut(res);
   }

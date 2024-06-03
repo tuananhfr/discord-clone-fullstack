@@ -133,6 +133,12 @@ export class ProfilesService {
     }
   }
 
+  async validateAccessToken(token: string) {
+    return this.jwtService.verify(token, {
+      secret: process.env.JWT_ACCESS_SECRET,
+    });
+  }
+
   async getTokens(userId: string, email: string) {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(
